@@ -25,6 +25,8 @@ git clone git@github.com:jakerobers/vim-hexrgba.git
 
 ## Mapping
 
+You can map a key to the `:HexRgba` command. Here is the key that I use:
+
 ```
 nnoremap <leader>h :HexRgba<CR>
 ```
