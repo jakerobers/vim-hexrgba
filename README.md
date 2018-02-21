@@ -38,39 +38,15 @@ you set one.
 
 **Converts hex to rgba**
 
-```
-color: #FFFFFF;
-```
-
-turns into
-
-```
-color: rgba(255, 255, 255, 1);
-```
+`color: #FFFFFF;` turns into `color: rgba(255, 255, 255, 1);`
 
 **Converts rgba to hex**
 
-```
-background-color: rgba(0, 0, 0, .1);
-```
-
-turns into
-
-```
-background-color: #000000;
-```
+`background-color: rgba(0, 0, 0, .1);` turns into `background-color: #000000;`
 
 **Converts rgb to hex**
 
-```
-background-color: rgb(0, 0, 0, .1);
-```
-
-turns into
-
-```
-background-color: #000000;
-```
+`background-color: rgb(0, 0, 0, .1);` turns into `background-color: #000000;`
 
 When you convert to hex, and then back to rgba, you will lose your transparency. Just something to be mindful about. Maybe in the future I will add a feature to save the transparency
 
