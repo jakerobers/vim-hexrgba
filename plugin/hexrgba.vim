@@ -8,7 +8,7 @@ let s:hex_capture_pattern = '.*#\(\x\{2}\)\(\x\{2}\)\(\x\{2}\)'
 let s:rgb_replace_pattern = 'rgba\?(.*)'
 let s:hex_replace_pattern = '#\x\{6}'
 
-function! s:ToggleHexRgba(line)
+function! hexrgba#ToggleHexRgba(line)
   let l:contents = getline(a:line)
 
   let l:input = s:FetchHex(l:contents)
@@ -54,5 +54,5 @@ function! s:DecimalToHex(string_number)
   return toupper(printf("%02x", str2nr(a:string_number)))
 endfunction
 
-command! ToggleHexRgba :call s:ToggleHexRgba(".")
+command! HexRgba :call hexrgba#ToggleHexRgba(".")
 
