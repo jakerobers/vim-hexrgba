@@ -3,7 +3,7 @@ if exists("g:loaded_hexrgb")
 endif
 let g:loaded_hexrgb = 1
 
-let s:rgb_capture_pattern = '\(\d\+\), \(\d\+\), \(\d\+\)'
+let s:rgb_capture_pattern = '\(\d\+\), \?\(\d\+\), \?\(\d\+\)'
 let s:hex_capture_pattern = '.*#\(\x\{2}\)\(\x\{2}\)\(\x\{2}\)'
 let s:rgb_replace_pattern = 'rgba\?(.*)'
 let s:hex_replace_pattern = '#\x\{6}'
