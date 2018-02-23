@@ -8,6 +8,8 @@ Why use rgba instead of rgb? I am of the opinion that rgba should only be used
 when needing to add transparency to a color. If a color does not require
 transparency, I use hex out of personal preference.
 
+![demo](https://github.com/jakerobers/vim-hexrgba/blob/master/demo.gif)
+
 ## Installation
 
 **Plug**
