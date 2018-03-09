@@ -1,7 +1,7 @@
-if exists("g:loaded_hexrgb")
+if exists("g:loaded_hexrgba")
   finish
 endif
-let g:loaded_hexrgb = 1
+let g:loaded_hexrgba = 1
 
 let s:rgb_capture_pattern = '\(\d\+\), \?\(\d\+\), \?\(\d\+\)'
 let s:hex_capture_pattern = '.*#\(\x\{2}\)\(\x\{2}\)\(\x\{2}\)'
@@ -11,32 +11,40 @@ let s:hex_replace_pattern = '#\x\{6}'
 function! hexrgba#ToggleHexRgba(line)
   let l:contents = getline(a:line)
 
-  let l:input = s:FetchHex(l:contents)
-  if len(l:input) > 0
-    let l:first = str2nr(l:input[0], 16)
-    let l:second = str2nr(l:input[1], 16)
-    let l:third = str2nr(l:input[2], 16)
-
-    let l:replacement = "rgba(". l:first .", ". l:second .", ". l:third .", 1)"
+  let l:hex_array = s:FetchHex(l:contents)
+  if len(l:hex_array) > 0
+    let l:replacement = s:convertHexToRgba(l:hex_array)
     exec a:line . "," . a:line . "s/" . s:hex_replace_pattern . "/" . l:replacement . "/g"
     return
   endif
 
-  let l:input = s:FetchRgb(l:contents)
-  if len(l:input) > 0
-    let l:firstHex = s:DecimalToHex(l:input[0])
-    let l:secondHex = s:DecimalToHex(l:input[1])
-    let l:thirdHex = s:DecimalToHex(l:input[2])
-
-    let l:replacement = "#" . l:firstHex . l:secondHex . l:thirdHex
+  let l:rgba_array = s:FetchRgba(l:contents)
+  if len(l:rgba_array) > 0
+    let l:replacement = s:convertRgbaToHex(l:rgba_array)
     exec a:line . "," . a:line . "s/" . s:rgb_replace_pattern . "/" . l:replacement . "/g"
   endif
 endfunction
 
+function! s:convertRgbaToHex(contents)
+    let l:firstHex = s:DecimalToHex(a:contents[0])
+    let l:secondHex = s:DecimalToHex(a:contents[1])
+    let l:thirdHex = s:DecimalToHex(a:contents[2])
+
+    return "#" . l:firstHex . l:secondHex . l:thirdHex
+endfunction
+
+function! s:convertHexToRgba(contents)
+    let l:first = str2nr(a:contents[0], 16)
+    let l:second = str2nr(a:contents[1], 16)
+    let l:third = str2nr(a:contents[2], 16)
+
+    return "rgba(". l:first .", ". l:second .", ". l:third .", 1)"
+endfunction
+
 " Returns a list of decimal numbers. One for each RGB value
-" :echo s:FetchRgb("color: rgba(255, 255, 255, 0.1)")
+" :echo s:FetchRgba("color: rgba(255, 255, 255, 0.1)")
 " ['255', '255', '255']
-function! s:FetchRgb(line_contents)
+function! s:FetchRgba(line_contents)
   let l:matches = matchlist(a:line_contents, s:rgb_capture_pattern)
   return l:matches[1:3]
 endfunction
